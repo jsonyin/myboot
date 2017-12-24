@@ -12,7 +12,7 @@ public class TaoItem implements Serializable {
 
     private String itemAttrs;
 
-    private String mainInage;
+    private String mainImage;
 
     private String brand;
 
@@ -31,6 +31,15 @@ public class TaoItem implements Serializable {
         ItemStatus(Integer value, String description) {
             this.value = value;
             this.description = description;
+        }
+
+        public static ItemStatus getItemStatus(int index){
+            for (ItemStatus i:ItemStatus.values()) {
+                if(i.value()==index){
+                    return i;
+                }
+            }
+            return null;
         }
 
         public int value() {
@@ -66,12 +75,12 @@ public class TaoItem implements Serializable {
         this.itemAttrs = itemAttrs;
     }
 
-    public String getMainInage() {
-        return mainInage;
+    public String getMainImage() {
+        return mainImage;
     }
 
-    public void setMainInage(String mainInage) {
-        this.mainInage = mainInage;
+    public void setMainImage(String mainInage) {
+        this.mainImage = mainImage;
     }
 
     public String getBrand() {
@@ -102,7 +111,7 @@ public class TaoItem implements Serializable {
         return status;
     }
 
-    public void setStatus(ItemStatus status) {
-        this.status = status;
+    public void setStatus(Integer status) {
+        this.status = ItemStatus.getItemStatus(status);
     }
 }
