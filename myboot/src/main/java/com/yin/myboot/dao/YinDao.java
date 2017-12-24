@@ -2,6 +2,7 @@ package com.yin.myboot.dao;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.lang.reflect.ParameterizedType;
 
@@ -9,8 +10,14 @@ import java.lang.reflect.ParameterizedType;
  * Created by zcy on 2017/12/21.
  */
 public class YinDao<T> {
-    @Autowired
+
     protected SqlSessionTemplate yinSqlsessionTemplate;
+
+    @Autowired
+    public void setYinSqlsessionTemplate(@Qualifier("yinSqlsessionTemplate")SqlSessionTemplate yinSqlsessionTemplate ){
+        this.yinSqlsessionTemplate = yinSqlsessionTemplate;
+    }
+
     protected String namespace;
 
     public YinDao(){
