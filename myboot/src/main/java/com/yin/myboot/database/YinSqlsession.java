@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import javax.sql.DataSource;
 
@@ -24,6 +25,8 @@ public class YinSqlsession {
     @Bean(name = "yinsqlSessionFactory")
     public SqlSessionFactoryBean yinsqlSessionFactory() throws Exception{
         SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
+        PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+        sessionFactory.setMapperLocations(resolver.getResources("classpath:/mapper/*Mapper.xml"));
         sessionFactory.setDataSource(Yindatasource);
         return sessionFactory;
     }

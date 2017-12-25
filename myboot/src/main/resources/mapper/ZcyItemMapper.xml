@@ -4,12 +4,12 @@
 <resultMap id="zcyItemMap" type="com.yin.myboot.model.ZcyItem">
     <id column="id" property="id"/>
     <result column="category_name" property="categoryName"/>
-    <result column="item_name" property="itemName"/>
+    <result column="name" property="itemName"/>
     <result column="shop_name" property="shopName"/>
     <result column="created_at" property="createdAt"/>
 </resultMap>
     <select id="selectByIds" resultType="list" resultMap="zcyItemMap">
-        select id,category_name,item_name,shop_name,created_at from parana_items where id in
+        select id,category_name,name,shop_name,created_at from parana_items where id in
         <foreach collection="list" item="ids" open="("  close=")" separator=",">
             #{ids}
         </foreach>

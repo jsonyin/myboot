@@ -10,6 +10,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import javax.sql.DataSource;
 /**
@@ -17,6 +18,7 @@ import javax.sql.DataSource;
  */
 @Configuration
 @ConditionalOnBean(name="Zcydatasource")
+@MapperScan(basePackages = "com.yin.myboot.dao",sqlSessionTemplateRef="zcysqlSessionTemplate")
 public class ZcySqlSession {
 
     @Autowired
@@ -26,6 +28,8 @@ public class ZcySqlSession {
     public SqlSessionFactory zcysqlSessionFactory()throws Exception{
         SqlSessionFactoryBean  sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(Zcydatasource);
+        PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+        sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:/mapper/*Mapper.xml"));
         return sqlSessionFactoryBean.getObject();
     }
 
