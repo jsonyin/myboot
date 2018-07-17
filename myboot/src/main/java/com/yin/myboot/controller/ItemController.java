@@ -1,8 +1,8 @@
 package com.yin.myboot.controller;
 
-import com.yin.myboot.dto.TaoItemDTO;
-import com.yin.myboot.model.TaoItem;
-import com.yin.myboot.service.impl.ZcyItemService;
+
+import com.yin.myboot.model.ZcyItem;
+import com.yin.myboot.service.ZcyItemService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +37,10 @@ private static final Logger logger = LoggerFactory.getLogger(ItemController.clas
         ids.add((long)248);
         ids.add((long)352);
         ids.add((long)353);
-        zcyItemService.getList(ids);
+        List<ZcyItem> items = zcyItemService.getList(ids);
+        for (ZcyItem i:items) {
+            logger.info("this  item is {},and itemCateroyName is{} ",i.getId(),i.getCategoryName() );
+        }
         return "hello";
     }
 

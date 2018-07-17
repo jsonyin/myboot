@@ -1,5 +1,6 @@
 package com.yin.myboot.dao;
 
+import com.yin.myboot.model.ZcyItem;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -44,6 +45,10 @@ public class ZcyDao<T> {
 
     public T selectOne(Long id){
         return this.zcysqlSessionTemplate.selectOne(this.namespace+".selectOne",id);
+    }
+
+    public List<T> findByParament(ZcyItem item){
+        return this.zcysqlSessionTemplate.selectList(this.namespace+".findByParament",item);
     }
 
 }

@@ -8,10 +8,19 @@
     <result column="shop_name" property="shopName"/>
     <result column="created_at" property="createdAt"/>
 </resultMap>
-    <select id="selectByIds" resultType="list" resultMap="zcyItemMap">
+    <select id="selectByIds" parameterType="list" resultMap="zcyItemMap">
         select id,category_name,name,shop_name,created_at from parana_items where id in
         <foreach collection="list" item="ids" open="("  close=")" separator=",">
             #{ids}
         </foreach>
+    </select>
+    <select id="findByParament"  parameterType="com.yin.myboot.model.ZcyItem" resultMap="zcyItemMap">
+        select id,category_name,name,shop_name,created_at from parana_items where 1=1
+        <if test="categoryName != null">
+            and category_name like CONCAT(#{category_name},'%')
+        </if>
+        <if test="createdAt != null">
+            and <![CDATA[created_at >= #{createdAt}]]>
+        </if>
     </select>
 </mapper>
